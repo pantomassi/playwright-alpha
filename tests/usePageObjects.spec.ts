@@ -1,6 +1,7 @@
 import {test, expect} from '@playwright/test'
 import { PageManager } from '../page-objects/pageManager'
 import { faker } from '@faker-js/faker'
+import { argosScreenshot } from "@argos-ci/playwright";
 
 test.beforeEach(async ({page}) => {
     await page.goto('/')
@@ -66,7 +67,9 @@ test('pick a date on range datepicker', async ({page}) => {
 
 test.only('testing with Argos CI', async ({page}) => {
     const pageManager = new PageManager(page)
-    await pageManager.navigateTo().formLayoutsPage()    
+    await pageManager.navigateTo().formLayoutsPage()
+    await argosScreenshot(page, "form layouts page");
     await page.waitForTimeout(1000) // timeout to see the navigation, otherwise it's processed too fast
     await pageManager.navigateTo().datepickerPage()
+    await argosScreenshot(page, "datepicker page");
 })
