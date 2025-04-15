@@ -61,3 +61,12 @@ test('pick a date on range datepicker', async ({page}) => {
     const dateToAssert = await pageManager.onDatepickerPage().pickDateInDatepickerWithRange(-10, 11)
     await expect(pageManager.onDatepickerPage().rangeDatepickerInputField).toHaveValue(dateToAssert)
 })
+
+
+
+test.only('testing with Argos CI', async ({page}) => {
+    const pageManager = new PageManager(page)
+    await pageManager.navigateTo().formLayoutsPage()    
+    await page.waitForTimeout(1000) // timeout to see the navigation, otherwise it's processed too fast
+    await pageManager.navigateTo().datepickerPage()
+})
